@@ -1,0 +1,22 @@
+ivshmem_proxy是利用ivshmem设备使得虚拟机中间通信的代理程序。
+
+代理程序分为frontend和backend两部分，分别运行在C/S架构的client端和server端。
+
+其中，frontend.c和backend.c是旧版本的程序，只支持1个连接，并且存在一些问题。
+不过这个旧版本的程序容易体现ivshmem_proxy的处理流程，故保留在源码中。
+
+new_frontend.c和new_backend.c是最新版本的程序，并且支持多个连接。
+
+使用方法：
+
+在server端执行
+
+	new_backend client_vm_ID port1
+
+client端执行
+
+	new_frontend server_vm_ID port2
+
+会把client端vm上与clienthost:port2的连接代理到serverhost:port1
+
+关于ivshmem的使用方法请搜索开源项目ivshmem 
